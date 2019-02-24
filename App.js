@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import placeImage from './src/assets/beautiful-place.jpg';
 
 import ListContainer from './src/components/ListContainer/ListContainer';
 import UserInput from './src/components/UserInput/UserInput';
@@ -11,7 +13,6 @@ export default class App extends Component {
 		this.state = {
 			placeName : '',
 			list : []
-
 		};
 	}
 
@@ -29,8 +30,13 @@ export default class App extends Component {
 
 		this.setState(prevState => {
 			return {
-				// placeName : '',
-				list : prevState.list.concat({key : Math.random() ,value : this.state.placeName})
+				list : prevState.list.concat({
+					key : Math.random().toString(),
+					name : this.state.placeName,
+					image : {
+						uri : "https://puu.sh/CQZXq/0773f87d38.jpg"
+					}
+				})
 			};
 		})
 	}
