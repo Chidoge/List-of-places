@@ -1,1 +1,1 @@
-# List-of-places
+My first React-Native app
