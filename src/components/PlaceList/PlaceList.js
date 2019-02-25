@@ -1,31 +1,54 @@
-import React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import React from "react";
+import { StyleSheet, FlatList } from "react-native";
 
-import ListItem from '../ListItem/ListItem';
+import ListItem from "../ListItem/ListItem";
 
-const placeList = (props) => {
+import { connect } from 'react-redux';
 
-    return (
-        <FlatList style = {styles.listContainer} data = { props.list } 
-        renderItem = { (info) => (
-            <ListItem 
-                placeName = {info.item.name} 
-                placeImage = {info.item.image} 
-                onItemPressed = { () => props.onSelectItem(info.item.key)}
-            ></ListItem>
-        )} />
-
-    );
-
+const mapStateToProps = (state) => {
+	return {
+		places : state.places.places
+	}
 }
 
-const styles = StyleSheet.create({
+const mapDispatchToProps = (dispatch) => {
+	return {
 
-	listContainer : {
-        width : "100%",
-        marginTop : 20
 	}
-})
+}
+
+class PlaceList extends React.Component {
+
+	constructor(props) {
+		super(props);
+	}
+	
+	render() {
+
+		const { places } = this.props;
+		return (
+			<FlatList
+				style = { styles.listContainer }
+				data = { places }
+				renderItem={ (info) => (
+					<ListItem
+						placeName={info.item.name}
+						placeImage={info.item.image}
+						placeKey = {info.item.key}
+					/>
+				)}
+			/>
+		);
+	}
+
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaceList);
+
+const styles = StyleSheet.create({
+	listContainer: {
+		width: "100%"
+	}
+});
 
 
-export default placeList;
