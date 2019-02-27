@@ -2,24 +2,6 @@ import React, { Component } from "react";
 import { View, TextInput, Button, StyleSheet } from "react-native";
 
 
-import { connect } from 'react-redux';
-import { addPlace } from "../../store/actions";
-
-const mapStateToProps = (state) => {
-
-	return {
-		
-	}
-}
-
-const mapDispatchToProps = (dispatch) => {
-
-	return {
-		onAddPlace : (placeName) => dispatch(addPlace(placeName))
-	}
-}
-
-
 class PlaceInput extends Component {
 
 
@@ -65,7 +47,8 @@ class PlaceInput extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceInput);
+export default PlaceInput;
+
 
 const styles = StyleSheet.create({
 	inputContainer: {

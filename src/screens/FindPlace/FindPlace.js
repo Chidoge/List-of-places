@@ -1,16 +1,36 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import PlaceList from '../../components/PlaceList/PlaceList';
+
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+	return {
+		places : state.places.places
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+
+	}
+}
 
 class FindPlaceScreen extends React.Component {
 
     render() {
         return (
             <View>
-                <Text>On FindPlaceScreen</Text>
+                <PlaceList places = {this.props.places} />
             </View>
         );
     }
 }
 
+export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
 
-export default FindPlaceScreen;
+const styles = StyleSheet.create({
+    listContainer : {
+        margin : 20
+    }
+});

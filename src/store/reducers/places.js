@@ -1,8 +1,6 @@
 import {
 	ADD_PLACE,
-	DELETE_PLACE,
-	SELECT_PLACE,
-	DESELECT_PLACE
+	DELETE_PLACE
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -27,14 +25,6 @@ const reducer = (state = initialState, action) => {
 				}),
 				selectedPlace: null
 			});
-		case SELECT_PLACE:
-			return Object.assign({}, state, {
-				selectedPlace: state.places.find(place => {
-					return place.key === action.payload;
-				})
-			});
-		case DESELECT_PLACE:
-			return Object.assign({}, state, { selectedPlace: null });
 		default:
 			return state;
 	}

@@ -3,19 +3,6 @@ import { StyleSheet, FlatList } from "react-native";
 
 import ListItem from "../ListItem/ListItem";
 
-import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => {
-	return {
-		places : state.places.places
-	}
-}
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-
-	}
-}
 
 class PlaceList extends React.Component {
 
@@ -26,15 +13,16 @@ class PlaceList extends React.Component {
 	render() {
 
 		const { places } = this.props;
+
 		return (
 			<FlatList
 				style = { styles.listContainer }
 				data = { places }
 				renderItem={ (info) => (
 					<ListItem
-						placeName={info.item.name}
-						placeImage={info.item.image}
-						placeKey = {info.item.key}
+						placeName = { info.item.name }
+						placeImage = { info.item.image }
+						placeKey = { info.item.key }
 					/>
 				)}
 			/>
@@ -43,7 +31,7 @@ class PlaceList extends React.Component {
 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlaceList);
+export default PlaceList;
 
 const styles = StyleSheet.create({
 	listContainer: {

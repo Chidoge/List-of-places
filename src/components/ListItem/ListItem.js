@@ -2,20 +2,6 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { selectPlace } from "../../store/actions";
 
-import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => {
-	return {
-
-	}
-}
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		onSelectItem : (key) => dispatch(selectPlace(key))
-	}
-}
-
 class ListItem extends React.Component {
 
 	constructor(props) {
@@ -24,20 +10,20 @@ class ListItem extends React.Component {
 
 	render() {
 
-		const { onSelectItem, placeImage, placeName, placeKey } = this.props;
+		const { placeImage, placeName, placeKey } = this.props;
 
 		return (
-			<TouchableOpacity onPress = { () => { onSelectItem(placeKey)}}>
-				<View style={styles.listItem}>
-					<Image resizeMode="cover" source={ placeImage} style={styles.placeImage} />
-					<Text>{placeName}</Text>
+			<TouchableOpacity onPress = { () => { alert('CLICKED ')}}>
+				<View style = { styles.listItem }>
+					<Image resizeMode="cover" source={ placeImage} style = { styles.placeImage } />
+					<Text>{ placeName }</Text>
 				</View>
 			</TouchableOpacity>
 		);
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
+export default ListItem;
 
 const styles = StyleSheet.create({
 	listItem: {
