@@ -1,8 +1,10 @@
 import React from "react";
-import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
+import { Modal, View, Image, Text, Button, StyleSheet, TouchableOpacity } from "react-native";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
 import { deletePlace, deselectPlace } from "../../store/actions";
+
 
 const mapStateToProps = (state) => {
 
@@ -43,9 +45,15 @@ class PlaceDetail extends React.Component {
 			>
 				<View style={styles.modalContainer}>
 					{modalContent}
-					<View>
-						<Button title = 'Delete' color = 'red' onPress = { onDeletePlace } />
-						<Button title = 'Close' onPress = { onDeselectPlace } />
+					<View style = {styles.menu}>
+						<View style = {styles.deleteButton}>
+							<TouchableOpacity onPress = { onDeletePlace }>
+								<Icon name = "ios-trash" color = "gray" size = {30}/>
+							</TouchableOpacity>
+						</View>
+						<View style = {styles.closeButton}>
+							<Button title = 'Close' onPress = { onDeselectPlace } />
+						</View>
 					</View>
 				</View>
 			</Modal>
@@ -68,6 +76,16 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		textAlign: "center",
 		fontSize: 28
+	},
+	deleteButton: {
+		alignItems: 'center'
+	},
+	closeButton: {
+		width: '60%'
+	},
+	menu: {
+		marginTop: 50,
+		alignItems: 'center'
 	}
 });
 
