@@ -21,7 +21,9 @@ class FindPlaceScreen extends React.Component {
     render() {
         return (
             <View>
-                <PlaceList places = {this.props.places} />
+                <View style = {styles.listContainer}>
+                    <PlaceList places = {this.props.places} />
+                </View>
             </View>
         );
     }

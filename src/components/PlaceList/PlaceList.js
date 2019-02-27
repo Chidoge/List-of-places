@@ -36,6 +36,9 @@ export default PlaceList;
 const styles = StyleSheet.create({
 	listContainer: {
 		width: "100%"
+	},
+	listItem: {
+		justifyContent: 'center'
 	}
 });
 
