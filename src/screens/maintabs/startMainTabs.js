@@ -25,8 +25,12 @@ const startTabs = () => {
                         title: "Find place",
                         icon: icons[0]
                     }
-
-                ]
+                ],
+                drawer: {
+                    left: {
+                        screen: "places.SideDrawer"
+                    }
+                }
             });
         }
     )
