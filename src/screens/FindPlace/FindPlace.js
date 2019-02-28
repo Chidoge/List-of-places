@@ -17,7 +17,26 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class FindPlaceScreen extends React.Component {
+    
 
+    constructor(props) {
+        super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    }
+
+    onNavigatorEvent = (event) => {
+        if (event.type === 'NavBarButtonPress') {
+            if (event.id === 'sideDrawerToggle') {
+                this.props.navigator.toggleDrawer({
+                    side: 'left',
+                    animated: true,
+                    to: 'open'
+                });
+            }
+        }
+    }
+
+    
     onItemSelect = (key) => {
         
         const selectedPlace = this.props.places.find(place => {
