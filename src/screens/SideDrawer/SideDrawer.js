@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 
 
 class SideDrawer extends React.Component {
@@ -7,7 +7,7 @@ class SideDrawer extends React.Component {
     render() {
 
         return (
-            <View>
+            <View style = {{ width: Dimensions.get('window').width * 0.8}}>
                 <Text>Side drawer</Text>
             </View>
         );
