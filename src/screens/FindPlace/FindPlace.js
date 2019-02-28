@@ -18,11 +18,29 @@ const mapDispatchToProps = (dispatch) => {
 
 class FindPlaceScreen extends React.Component {
 
+    onItemSelect = (key) => {
+        
+        const selectedPlace = this.props.places.find(place => {
+            return (place.key === key)
+        });
+
+        this.props.navigator.push({
+            screen: "places.PlaceDetailScreen",
+            title: selectedPlace.name,
+            passProps: {
+                selectedPlace: selectedPlace
+            },
+            animated: true,
+            animationType: 'slide-horizontal'
+        });
+    }
+
+
     render() {
         return (
             <View>
                 <View style = {styles.listContainer}>
-                    <PlaceList places = {this.props.places} />
+                    <PlaceList onItemSelect = {this.onItemSelect} places = {this.props.places} />
                 </View>
             </View>
         );

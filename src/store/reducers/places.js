@@ -21,9 +21,8 @@ const reducer = (state = initialState, action) => {
 		case DELETE_PLACE:
 			return Object.assign({}, state, {
 				places: state.places.filter(place => {
-					return place.key !== state.selectedPlace.key;
-				}),
-				selectedPlace: null
+					return place.key !== action.payload
+				})
 			});
 		default:
 			return state;

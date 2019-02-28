@@ -13,7 +13,7 @@ class ListItem extends React.Component {
 		const { placeImage, placeName, placeKey } = this.props;
 
 		return (
-			<TouchableOpacity onPress = { () => { alert('CLICKED ')}}>
+			<TouchableOpacity onPress = { () => { this.props.onItemSelect(placeKey) }}>
 				<View style = { styles.listItem }>
 					<Image resizeMode="cover" source={ placeImage} style = { styles.placeImage } />
 					<Text>{ placeName }</Text>

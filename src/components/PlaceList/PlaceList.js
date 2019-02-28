@@ -20,6 +20,7 @@ class PlaceList extends React.Component {
 				data = { places }
 				renderItem={ (info) => (
 					<ListItem
+						onItemSelect = {this.props.onItemSelect}
 						placeName = { info.item.name }
 						placeImage = { info.item.image }
 						placeKey = { info.item.key }
