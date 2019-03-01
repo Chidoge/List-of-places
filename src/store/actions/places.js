@@ -8,7 +8,7 @@ export const addPlace = (placeName) => {
 			placeName : placeName,
 			key : Math.random().toString(),
 			image : {
-				uri : "https://i.imgur.com/HXIa264.png"
+				uri : "https://thefirsttravels.com/wp-content/uploads/2017/11/phu-quoc-the-most-beautiful-place-in-south-vietnam-3-min-640x400.jpg"
 			}
 		}
 	};
