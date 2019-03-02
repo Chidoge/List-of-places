@@ -10,6 +10,7 @@ import {
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
 import MainText from '../../components/UI/MainText/MainText';
+import ButtonBackground from '../../components/UI/ButtonWithBackground/ButtonWithBackground';
 import backgroundImage from '../../assets/background.jpg';
 import startMainTabs from '../maintabs/startMainTabs';
 
@@ -34,7 +35,12 @@ class AuthScreen extends React.Component {
                         <HeadingText text = 'Sign in to continue' />
                     </MainText>
 
-                    <Button title = "Switch to login" onPress = { this.onLogin }/>
+                    <ButtonBackground 
+                        onPress = { this.onLogin }
+                        color = '#29aaf4'
+                    >
+                        Switch to login
+                    </ButtonBackground>
 
                     <View style = {styles.inputContainer}>
                         <DefaultInput style = {styles.input} placeholder = 'Email' />
@@ -42,7 +48,13 @@ class AuthScreen extends React.Component {
                         <DefaultInput style = {styles.input} placeholder = 'Confirm password' />
                     </View>
 
-                    <Button title = "Submit" onPress = { this.onLogin }/>
+                    
+                    <ButtonBackground 
+                        onPress = { this.onLogin }
+                        color = '#29aaf4'
+                    >
+                        Submit
+                    </ButtonBackground>
 
                 </View>
             </ImageBackground>
