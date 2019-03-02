@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 
 import DefaultInput from '../../components/UI/DefaultInput/DefaultInput';
+import HeadingText from '../../components/UI/HeadingText/HeadingText';
+import MainText from '../../components/UI/MainText/MainText';
 
 import startMainTabs from '../maintabs/startMainTabs';
 
@@ -17,7 +19,10 @@ class AuthScreen extends React.Component {
 
         return (
             <View style = {styles.container}>
-                <Text>Sign in to continue</Text>
+
+                <MainText >
+                    <HeadingText text = 'Sign in to continue' />
+                </MainText>
 
                 <Button title = "Switch to login" onPress = { this.onLogin }/>
 
