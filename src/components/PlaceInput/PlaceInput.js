@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import React from "react";
+import { StyleSheet } from 'react-native';
+import DefaultInput from "../UI/DefaultInput/DefaultInput";
 
 
-class PlaceInput extends Component {
+class PlaceInput extends React.Component {
 
 
 	constructor(props) {
@@ -18,52 +19,18 @@ class PlaceInput extends Component {
 		});
 	};
 
-	onButtonPress = () => {
-		if (this.state.placeName.trim() === "") {
-			return;
-		}
-		this.setState({
-			placeName : ''
-		})
-		this.props.onAddPlace(this.state.placeName);
-	};
-
 	render() {
 		return (
-			<View style={styles.inputContainer}>
-				<TextInput
-					placeholder = 'An awesome place'
-					value = { this.state.placeName }
-					onChangeText = { this.onTextChange }
-					style = { styles.placeInput }
-				/>
-				<Button
-					title = 'Add item'
-					style = { styles.placeButton }
-					onPress = { this.onButtonPress }
-				/>
-			</View>
+			<DefaultInput style = {styles.input} placeholder = 'Place name' value = {this.state.placeName} onChangeText = {this.onTextChange} />
 		);
 	}
 }
 
 export default PlaceInput;
 
-
 const styles = StyleSheet.create({
-	inputContainer: {
-		// flex: 1,
-		width: "100%",
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center"
-	},
-	placeInput: {
-		width: "70%"
-	},
-	placeButton: {
-		width: "30%"
+
+	input: {
+		width: '80%'
 	}
-});
-
-
+})
