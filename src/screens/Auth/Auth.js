@@ -32,7 +32,9 @@ class AuthScreen extends React.Component {
                 <View style = {styles.container}>
 
                     <MainText >
-                        <HeadingText text = 'Sign in to continue' />
+                        <HeadingText>
+                            Sign in to continue
+                        </HeadingText>
                     </MainText>
 
                     <ButtonBackground 

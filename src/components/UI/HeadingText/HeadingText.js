@@ -8,7 +8,7 @@ const headingText = (props) => {
         {...props}
         style = {[styles.textHeading, props.style]} 
         >
-        { props.text }
+        { props.children }
         </Text>
     );
 }
