@@ -22,11 +22,10 @@ class AuthScreen extends React.Component {
                 <Button title = "Switch to login" onPress = { this.onLogin }/>
 
                 <View style = {styles.inputContainer}>
-                    <DefaultInput placeholder = 'Email' />
-                    <DefaultInput placeholder = 'Password' />
-                    <DefaultInput placeholder = 'Confirm password' />
+                    <DefaultInput style = {styles.input} placeholder = 'Email' />
+                    <DefaultInput style = {styles.input} placeholder = 'Password' />
+                    <DefaultInput style = {styles.input} placeholder = 'Confirm password' />
                 </View>
-
 
                 <Button title = "Submit" onPress = { this.onLogin }/>
 
@@ -42,7 +41,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     inputContainer: {
-        width: '80%'
+        width: '80%',
+        margin: 10
+    },
+    input: {
+        backgroundColor: '#eee',
+        borderColor: '#bbb'
     }
 });
 export default AuthScreen;
