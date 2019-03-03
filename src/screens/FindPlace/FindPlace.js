@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 import PlaceList from '../../components/PlaceList/PlaceList';
+import MainText from '../../components/UI/MainText/MainText';
+import HeadingText from '../../components/UI/HeadingText/HeadingText';
 
 import { connect } from 'react-redux';
 
@@ -127,6 +129,13 @@ class FindPlaceScreen extends React.Component {
                         opacity: this.state.listAnim
                     }}
                     >
+                    <View style = {styles.heading}>
+                        <MainText>
+                            <HeadingText>
+                                List
+                            </HeadingText>
+                        </MainText>
+                    </View>
                     <PlaceList onItemSelect = {this.onItemSelect} places = {this.props.places} />
                 </Animated.View>
         }
@@ -142,6 +151,13 @@ class FindPlaceScreen extends React.Component {
 export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
 
 const styles = StyleSheet.create({
+    heading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        marginBottom: 15 
+    },
     buttonContainer: {
         flex: 1,
         justifyContent: 'center',
