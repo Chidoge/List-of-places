@@ -19,7 +19,7 @@ const startTabs = () => {
                         screen: "places.SharePlaceScreen",
                         label: "Share place",
                         title: "Share place",
-                        icon: icons[1],
+                        icon: icons[0],
                         navigatorButtons: {
                             leftButtons: [
                                 {
@@ -35,7 +35,7 @@ const startTabs = () => {
                         screen: "places.FindPlaceScreen",
                         label: "Find place",
                         title: "Find place",
-                        icon: icons[0],
+                        icon: icons[1],
                         navigatorButtons: {
                             leftButtons: [
                                 {
@@ -48,6 +48,14 @@ const startTabs = () => {
                         }
                     }
                 ],
+                /* IOS only */
+                tabsStyle: {
+                    tabBarSelectedButtonColor: 'orange'
+                },
+                /* Android only */
+                appStyle: {
+                    tabBarSelectedButtonColor: 'orange'
+                },
                 drawer: {
                     left: {
                         screen: "places.SideDrawer"

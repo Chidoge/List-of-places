@@ -28,6 +28,10 @@ const mapDispatchToProps = (dispatch) => {
 
 class SharePlaceScreen extends React.Component {
 
+    static navigatorStyle = {
+        navBarButtonColor: 'blue'
+    };
+    
     constructor(props) {
         super(props);
 

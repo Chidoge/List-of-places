@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
 
 class FindPlaceScreen extends React.Component {
     
+    static navigatorStyle = {
+        navBarButtonColor: 'blue'
+    };
 
     constructor(props) {
         super(props);
