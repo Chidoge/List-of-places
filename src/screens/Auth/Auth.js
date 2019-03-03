@@ -22,7 +22,30 @@ class AuthScreen extends React.Component {
         super(props);
         
         this.state = {
-            viewMode: Dimensions.get('window').height > 500 ? 'portrait' : 'landscape'
+            viewMode: Dimensions.get('window').height > 500 ? 'portrait' : 'landscape',
+            controls: {
+                email: {
+                    value: '',
+                    valid: false,
+                    validationRules: {
+                        isEmail: true
+                    }
+                },
+                password: {
+                    value: '',
+                    valid: false,
+                    validationRules: {
+                        minLength: 6
+                    }
+                },
+                confirmPassword: {
+                    value: '',
+                    valid: false,
+                    validationRules: {
+                        equalTo: 'password'
+                    }
+                }
+            }
         }
 
         Dimensions.addEventListener('change',this.updateStyles);
@@ -38,10 +61,27 @@ class AuthScreen extends React.Component {
         })
     }
 
+    logFields = () => {
+        alert(`${this.state.controls.email.value}/ ${this.state.controls.password.value}/ ${this.state.controls.confirmPassword.value}`)
+    }
     onLogin = () => {
         startMainTabs();
     }
 
+    updateInputState = (key, val) => {
+
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    [key]: {
+                        ...prevState.controls[key],
+                        value: val
+                    }
+                }
+            }
+        })
+    }
 
     render() {
 
@@ -66,20 +106,35 @@ class AuthScreen extends React.Component {
 
                     { headingText }
                     <ButtonBackground 
-                        onPress = { this.onLogin }
+                        onPress = { this.logFields }
                         color = '#29aaf4'
                     >
                         Switch to login
                     </ButtonBackground>
 
                     <View style = {styles.inputContainer}>
-                        <DefaultInput style = {styles.input} placeholder = 'Email' />
+                        <DefaultInput 
+                            style = {styles.input} 
+                            placeholder = 'Email'
+                            value = {this.state.controls.email.value}
+                            onChangeText = { (val) => {this.updateInputState('email', val)}} 
+                            />
                         <View style = { this.state.viewMode === 'portrait' ? styles.portraitPasswordContainer : styles.landscapePasswordContainer }>
                             <View style = { this.state.viewMode === 'portrait' ? styles.portraitPasswordWrapper : styles.landscapePasswordWrapper }>
-                                <DefaultInput style = {styles.input} placeholder = 'Password' />
+                                <DefaultInput 
+                                    style = {styles.input} 
+                                    placeholder = 'Password' 
+                                    value = {this.state.controls.password.value}
+                                    onChangeText = { (val) => {this.updateInputState('password', val)}} 
+                                    />
                             </View>
                             <View style = { this.state.viewMode === 'portrait' ? styles.portraitPasswordWrapper : styles.landscapePasswordWrapper }>
-                                <DefaultInput style = {styles.input} placeholder = 'Confirm password' />
+                                <DefaultInput 
+                                    style = {styles.input} 
+                                    placeholder = 'Confirm password' 
+                                    value = {this.state.controls.confirmPassword.value}
+                                    onChangeText = { (val) => {this.updateInputState('confirmPassword', val)}} 
+                                    />
                             </View>
                         </View>
 
