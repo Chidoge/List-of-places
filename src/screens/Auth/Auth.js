@@ -165,6 +165,7 @@ class AuthScreen extends React.Component {
                     onChangeText = { (val) => {this.updateInputState('confirmPassword', val)}}
                     valid = {this.state.controls.confirmPassword.valid}
                     touched = {this.state.controls.confirmPassword.touched}
+                    secureTextEntry
                     />
             </View>
 
@@ -188,7 +189,7 @@ class AuthScreen extends React.Component {
                 <View style = {styles.container}>
 
                     { headingText }
-                    
+
                     <ButtonBackground 
                         onPress = { this.switchMode }
                         color = '#29aaf4'
@@ -204,6 +205,9 @@ class AuthScreen extends React.Component {
                             onChangeText = { (val) => {this.updateInputState('email', val)}}
                             valid = {this.state.controls.email.valid}  
                             touched = {this.state.controls.email.touched}
+                            autoCapitalize = {'none'}
+                            autoCorrect = {false}
+                            keyboardType = {'email-address'}
                             />
                         <View style = { (this.state.viewMode === 'portrait' || this.state.authMode === 'login')
                             ? styles.portraitPasswordContainer 
@@ -218,6 +222,7 @@ class AuthScreen extends React.Component {
                                     onChangeText = { (val) => {this.updateInputState('password', val)}}
                                     valid = {this.state.controls.password.valid} 
                                     touched = {this.state.controls.password.touched}
+                                    secureTextEntry
                                     />
                             </View>
                             { signUpContent }
