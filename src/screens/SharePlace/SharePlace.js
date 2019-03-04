@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, Image, ScrollView, StyleSheet } from 'react-native';
+import { View, Button, ScrollView, StyleSheet } from 'react-native';
 
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import PlaceInput from '../../components/PlaceInput/PlaceInput';
 import PickImage from '../../components/PickImage/PickImage';
 import PickLocation from '../../components/PickLocation/PickLocation';
+
+import validate from '../../utility/validation';
 
 
 const mapStateToProps = (state) => {
@@ -36,7 +38,16 @@ class SharePlaceScreen extends React.Component {
         super(props);
 
         this.state = {
-            placeName: ''
+            controls: {
+                placeName: {
+                    value: '',
+                    valid: false,
+                    touched: false,
+                    validationRules: {
+                        notEmpty: true
+                    }
+                }
+            }
         }
 
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
@@ -55,23 +66,42 @@ class SharePlaceScreen extends React.Component {
     }
 
     onTextChange = (text) => {
-        this.setState({
-            placeName: text
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    placeName: {
+                        ...prevState.controls.placeName,
+                        value: text,
+                        valid: validate(text, prevState.controls.placeName.validationRules),
+                        touched: true
+                    }
+                }
+            }
         })
     }
 
     onSharePlace = () => {
 
-        const { placeName } = this.state;
+        const placeName = this.state.controls.placeName.value;
 
         if (placeName.trim() !== "") {
 
             this.props.onAddPlace(placeName);
 
             /* Clear text input after submitting */
-            this.setState({
-                placeName : ''
-            });
+            this.setState(prevState => {
+                return {
+                    controls: {
+                        ...prevState.controls,
+                        placeName: {
+                            ...prevState.controls.placeName,
+                            value: ''
+                            
+                        }
+                    }
+                }
+            })
 
             alert('Place added!');
         }
@@ -92,9 +122,16 @@ class SharePlaceScreen extends React.Component {
                 <PickLocation />
 
 
-                <PlaceInput placeName = {this.state.placeName} onTextChange = {this.onTextChange} />
+                <PlaceInput 
+                    placeData = {this.state.controls.placeName} 
+                    onTextChange = {this.onTextChange}
+                    />
                 <View style = {styles.button}>
-                    <Button title = 'Share place' onPress = {this.onSharePlace} />
+                    <Button 
+                        title = 'Share place' 
+                        onPress = {this.onSharePlace}
+                        disabled = {!this.state.controls.placeName.valid} 
+                        />
                 </View>
 
             </ScrollView>
