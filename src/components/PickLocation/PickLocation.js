@@ -11,8 +11,8 @@ class PickLocation extends React.Component {
 
         this.state = {
             focusedLocation: {
-                latitude: 37.7900352,
-                longitude: -122.4013726,
+                latitude: -36.853039,
+                longitude: 174.768932,
                 latitudeDelta: 0.0122,
                 longitudeDelta: (Dimensions.get('window').width/ Dimensions.get('window').height )* 0.0122 
             },
@@ -24,6 +24,13 @@ class PickLocation extends React.Component {
     pickLocation = (event) => {
 
         const coords = event.nativeEvent.coordinate;
+
+        this.map.animateToRegion({
+           ...this.state.focusedLocation,
+           latitude: coords.latitude,
+           longitude: coords.longitude,
+           duration: 500
+        });
 
         this.setState(prevState => {
             return {
@@ -47,11 +54,12 @@ class PickLocation extends React.Component {
         }
         return (
             <View style = {styles.container }>
-                <MapView 
-                    region = {this.state.focusedLocation}
+                <MapView
+                    initialRegion = {this.state.focusedLocation} 
                     provider = {PROVIDER_GOOGLE} 
                     style = {styles.map}
                     onPress = {this.pickLocation}
+                    ref = { (ref) => this.map = ref}
                 >
                     { marker }
                 </MapView>
