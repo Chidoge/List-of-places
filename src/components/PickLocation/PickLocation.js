@@ -44,6 +44,26 @@ class PickLocation extends React.Component {
         })
     }
 
+    getLocation = () => {
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const coordsEvent = {
+                    nativeEvent: {
+                        coordinate: {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        }
+                    }
+                }
+                this.pickLocation(coordsEvent);
+            },
+            (err) => {
+                alert(err)
+            }
+        )
+    }
+
     render() {
 
         let marker = null;
@@ -64,7 +84,7 @@ class PickLocation extends React.Component {
                     { marker }
                 </MapView>
                 <View style = {styles.button}>
-                    <Button title = 'Locate me' onPress = { () => { alert('Pick location') }}/>
+                    <Button title = 'Locate me' onPress = {this.getLocation}/>
                 </View>
             </View>
         );
