@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
 	return {
-		onAddPlace : (placeName) => dispatch(addPlace(placeName))
+		onAddPlace : (placeName, location) => dispatch(addPlace(placeName, location))
 	}
 }
 
@@ -46,6 +46,10 @@ class SharePlaceScreen extends React.Component {
                     validationRules: {
                         notEmpty: true
                     }
+                },
+                location: {
+                    value: null,
+                    valid: false
                 }
             }
         }
@@ -84,28 +88,41 @@ class SharePlaceScreen extends React.Component {
     onSharePlace = () => {
 
         const placeName = this.state.controls.placeName.value;
+        const location = this.state.controls.location.value;
 
-        if (placeName.trim() !== "") {
+        this.props.onAddPlace(placeName, location);
 
-            this.props.onAddPlace(placeName);
-
-            /* Clear text input after submitting */
-            this.setState(prevState => {
-                return {
-                    controls: {
-                        ...prevState.controls,
-                        placeName: {
-                            ...prevState.controls.placeName,
-                            value: ''
-                            
-                        }
+        /* Clear text input after submitting */
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    placeName: {
+                        ...prevState.controls.placeName,
+                        value: ''
+                        
                     }
                 }
-            })
+            }
+        })
 
-            alert('Place added!');
-        }
+        alert('Place added!');
+        
 
+    }
+
+    locationPickedHandler = (location) => {
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    location: {
+                        value: location,
+                        valid: true
+                    }
+                }
+            }
+        })
     }
 
     render() {
@@ -119,7 +136,7 @@ class SharePlaceScreen extends React.Component {
                 </MainText>
 
                 <PickImage />
-                <PickLocation />
+                <PickLocation onLocationPick = {this.locationPickedHandler}/>
 
 
                 <PlaceInput 
@@ -130,7 +147,7 @@ class SharePlaceScreen extends React.Component {
                     <Button 
                         title = 'Share place' 
                         onPress = {this.onSharePlace}
-                        disabled = {!this.state.controls.placeName.valid} 
+                        disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid} 
                         />
                 </View>
 

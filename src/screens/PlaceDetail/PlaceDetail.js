@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, Platform, Dimensions } from "react-native";
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { connect } from 'react-redux';
@@ -56,8 +57,28 @@ class PlaceDetail extends React.Component {
 
 			<View style={[styles.container, (this.state.viewMode === 'portrait' ? styles.portraitContainer : styles.landscapeContainer)]}>
 
-				<View style = {styles.subContainer}>
-					<Image source={selectedPlace.image} style={styles.placeImage} />
+				<View style = {styles.placeDetailContainer}>
+					{/* Image */}
+					<View style = {styles.subContainer}>
+						<Image source={selectedPlace.image} style={styles.placeImage} />
+					</View>
+
+					
+					{/* Map */}
+					<View style = {styles.subContainer}>
+						<MapView  
+							initialRegion = {{
+								...selectedPlace.location,
+								latitudeDelta: 0.0122,
+								longitudeDelta: (Dimensions.get('window').width/ Dimensions.get('window').height )* 0.0122 
+							}} 
+							style = {styles.map}
+							ref = { (ref) => this.map = ref}>
+							<MapView.Marker 
+								coordinate = {selectedPlace.location}
+							/>
+						</MapView>
+					</View>
 				</View>
 
 
@@ -98,18 +119,24 @@ const styles = StyleSheet.create({
 	},
 	placeImage: {
 		width: "100%",
-		height: 200
+		height: '100%'
 	},
 	placeName: {
 		fontWeight: "bold",
 		textAlign: "center",
 		fontSize: 28
 	},
+	placeDetailContainer: {
+		flex: 2
+	},
 	deleteButton: {
 		alignItems: 'center'
 	},
 	subContainer: {
 		flex: 1
-	}
+	},
+	map: {
+		...StyleSheet.absoluteFillObject
+    },
 });
 
