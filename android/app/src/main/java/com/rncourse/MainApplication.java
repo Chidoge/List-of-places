@@ -15,6 +15,8 @@ import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
 
+import com.imagepicker.ImagePickerPackage;
+
 public class MainApplication extends NavigationApplication  {
 
 
@@ -24,13 +26,13 @@ public class MainApplication extends NavigationApplication  {
 		SoLoader.init(this, /* native exopackage */ false);
 	}
 
-
 	public List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
 		return Arrays.<ReactPackage>asList(
-						new VectorIconsPackage(),
-				new MapsPackage()
+				new VectorIconsPackage(),
+				new MapsPackage(),
+				new ImagePickerPackage()
 		);
 	}
 

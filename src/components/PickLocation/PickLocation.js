@@ -50,7 +50,7 @@ class PickLocation extends React.Component {
     }
 
     getLocation = () => {
-
+        
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const coordsEvent = {
@@ -64,7 +64,7 @@ class PickLocation extends React.Component {
                 this.pickLocation(coordsEvent);
             },
             (err) => {
-                alert(err)
+                alert(...err)
             }
         )
     }

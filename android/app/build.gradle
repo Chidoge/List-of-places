@@ -146,6 +146,8 @@ dependencies {
     compile project(':react-native-navigation')
 
     implementation project(':react-native-maps')
+
+    compile project(':react-native-image-picker')
 }
 
 // Run this once to be able to run the application with BUCK
