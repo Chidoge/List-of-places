@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, ScrollView, StyleSheet } from 'react-native';
+import { View, Button, ScrollView, StyleSheet, ActivityIndicator } from 'react-native';
 
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
@@ -16,7 +16,7 @@ import validate from '../../utility/validation';
 const mapStateToProps = (state) => {
 
 	return {
-		
+		isLoading: state.ui.isLoading
 	}
 }
 
@@ -146,6 +146,18 @@ class SharePlaceScreen extends React.Component {
     }
 
     render() {
+
+        let submitButton = 
+            <Button 
+                title = 'Share place' 
+                onPress = {this.onSharePlace}
+                disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid || !this.state.controls.image.valid} 
+                />;
+
+        if (this.props.isLoading) {
+            submitButton = <ActivityIndicator/>
+        }
+
         return (
             <ScrollView contentContainerStyle = { styles.container }>
 
@@ -164,11 +176,7 @@ class SharePlaceScreen extends React.Component {
                     onTextChange = {this.onTextChange}
                     />
                 <View style = {styles.button}>
-                    <Button 
-                        title = 'Share place' 
-                        onPress = {this.onSharePlace}
-                        disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid || !this.state.controls.image.valid} 
-                        />
+                    { submitButton }
                 </View>
 
             </ScrollView>
