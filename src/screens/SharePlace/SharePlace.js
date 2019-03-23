@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
 	return {
-		onAddPlace : (placeName, location) => dispatch(addPlace(placeName, location))
+		onAddPlace : (placeName, location, image) => dispatch(addPlace(placeName, location, image))
 	}
 }
 
@@ -48,6 +48,10 @@ class SharePlaceScreen extends React.Component {
                     }
                 },
                 location: {
+                    value: null,
+                    valid: false
+                },
+                image: {
                     value: null,
                     valid: false
                 }
@@ -89,8 +93,9 @@ class SharePlaceScreen extends React.Component {
 
         const placeName = this.state.controls.placeName.value;
         const location = this.state.controls.location.value;
+        const image = this.state.controls.image.value;
 
-        this.props.onAddPlace(placeName, location);
+        this.props.onAddPlace(placeName, location, image);
 
         /* Clear text input after submitting */
         this.setState(prevState => {
@@ -125,6 +130,21 @@ class SharePlaceScreen extends React.Component {
         })
     }
 
+    imagePickedHandler = (image) => {
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    image: {
+                        value: image,
+                        valid: true
+                    }
+                }
+            }
+        })
+        
+    }
+
     render() {
         return (
             <ScrollView contentContainerStyle = { styles.container }>
@@ -135,7 +155,7 @@ class SharePlaceScreen extends React.Component {
                     </HeadingText>
                 </MainText>
 
-                <PickImage />
+                <PickImage onImagePicked = {this.imagePickedHandler}/>
                 <PickLocation onLocationPick = {this.locationPickedHandler}/>
 
 
@@ -147,7 +167,7 @@ class SharePlaceScreen extends React.Component {
                     <Button 
                         title = 'Share place' 
                         onPress = {this.onSharePlace}
-                        disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid} 
+                        disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid || !this.state.controls.image.valid} 
                         />
                 </View>
 
