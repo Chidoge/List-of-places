@@ -1,4 +1,4 @@
-import { ADD_PLACE, DELETE_PLACE} from './actionTypes';
+import { ADD_PLACE, DELETE_PLACE, SET_PLACES} from './actionTypes';
 import { uiStartLoading, uiStopLoading } from './index';
 
 export const addPlace = (placeName, location, image) => {
@@ -16,16 +16,15 @@ export const addPlace = (placeName, location, image) => {
 		})
 		.catch(err => {
 			console.log(err);
+			alert('Something went wrong, please try again.');
 			dispatch(uiStopLoading());
 		})
-		.then((res) => {
-			res.json();
-		})
+		.then((res) => res.json())
 		.then((res) => {
 			const placeData = {
 				name: placeName,
 				location: location,
-				image: parsedRes.imageUrl
+				image: res.imageUrl
 			}
 			return fetch('https://awesome-places-cf70c.firebaseio.com/places.json', {
 				method: 'POST',
@@ -34,6 +33,7 @@ export const addPlace = (placeName, location, image) => {
 		})
 		.catch(err => {
 			console.log(err);
+			alert(err);
 			dispatch(uiStopLoading());
 		})
 		.then((res) => {
@@ -47,6 +47,38 @@ export const addPlace = (placeName, location, image) => {
 	}
 };
 
+export const getPlaces = () => {
+	return dispatch => {
+
+		fetch('https://awesome-places-cf70c.firebaseio.com/places.json')
+		.catch(err => {
+			alert('Something went wrong, please try again later.');
+			console.log(err);
+		})
+		.then(res => res.json())
+		.then(res => {
+
+			const places = [];
+			for (let key in res) {
+				places.push({
+					...res[key],
+					image: {
+						uri: res[key].image
+					},
+					key: key
+				})
+			}
+			dispatch(setPlaces(places));
+		})
+	}
+}
+
+export const setPlaces = (places) => {
+	return {
+		type: SET_PLACES,
+		payload: places
+	}
+}
 export const deletePlace = (key) => {
 	return {
 		type: DELETE_PLACE,

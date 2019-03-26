@@ -111,9 +111,6 @@ class SharePlaceScreen extends React.Component {
             }
         })
 
-        alert('Place added!');
-        
-
     }
 
     locationPickedHandler = (location) => {
@@ -152,7 +149,7 @@ class SharePlaceScreen extends React.Component {
                 title = 'Share place' 
                 onPress = {this.onSharePlace}
                 disabled = {!this.state.controls.placeName.valid || !this.state.controls.location.valid || !this.state.controls.image.valid} 
-                />;
+                />
 
         if (this.props.isLoading) {
             submitButton = <ActivityIndicator/>

@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { selectPlace } from "../../store/actions";
 
 class ListItem extends React.Component {
 
@@ -15,7 +14,7 @@ class ListItem extends React.Component {
 		return (
 			<TouchableOpacity onPress = { () => { this.props.onItemSelect(placeKey) }}>
 				<View style = { styles.listItem }>
-					<Image resizeMode="cover" source={ placeImage} style = { styles.placeImage } />
+					<Image resizeMode="cover" source = { placeImage } style = { styles.placeImage } />
 					<Text>{ placeName }</Text>
 				</View>
 			</TouchableOpacity>

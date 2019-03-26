@@ -11,6 +11,8 @@ import PlaceList from '../../components/PlaceList/PlaceList';
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
 
+import { getPlaces } from '../../store/actions/index';
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
@@ -21,7 +23,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-
+        loadPlaceList: () => dispatch(getPlaces())
 	}
 }
 
@@ -41,6 +43,10 @@ class FindPlaceScreen extends React.Component {
         }
 
         this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    }
+
+    componentDidMount() {
+        this.props.loadPlaceList();
     }
 
     onNavigatorEvent = (event) => {
