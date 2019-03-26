@@ -1,5 +1,5 @@
 import {
-	SET_PLACES
+	SET_PLACES, REMOVE_PLACE
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -14,12 +14,12 @@ const reducer = (state = initialState, action) => {
 				...state,
 				places: action.payload
 			}
-		// case DELETE_PLACE:
-		// 	return Object.assign({}, state, {
-		// 		places: state.places.filter(place => {
-		// 			return place.key !== action.payload
-		// 		})
-		// 	});
+		case REMOVE_PLACE:
+			return Object.assign({}, state, {
+				places: state.places.filter(place => {
+					return place.key !== action.payload
+				})
+			});
 		default:
 			return state;
 	}
